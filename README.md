@@ -16,7 +16,7 @@ Init plugin:
 ```html
     <script type="text/javascript">
         $.feedback({
-            ajaxURL: 'http://black.camel',
+            ajaxURL: 'http://test.url.com/feedback',
             html2canvasURL: 'js/html2canvas.js'
         });
     </script>
