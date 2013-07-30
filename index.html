@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Feedback by ivoviz</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Feedback</h1>
+          <h2>Feedback tool similar to the Google Feedback.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/ivoviz/feedback/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/ivoviz/feedback/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/ivoviz/feedback" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="feedback" class="anchor" href="#feedback"><span class="octicon octicon-link"></span></a>feedback</h1>
+
+<p>Feedback tool similar to the Google Feedback based on jQuery and HTML2Canvas.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Load jQuery, the plugin, and its CSS:</p>
+
+<div class="highlight"><pre>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-latest.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"feedback.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"css/feedback.css"</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+<p>Init plugin:</p>
+
+<div class="highlight"><pre>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">feedback</span><span class="p">({</span>
+            <span class="nx">ajaxURL</span><span class="o">:</span> <span class="s1">'http://test.url.com/feedback'</span><span class="p">,</span>
+            <span class="nx">html2canvasURL</span><span class="o">:</span> <span class="s1">'js/html2canvas.js'</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>jQuery</li>
+<li>html2canvas</li>
+</ul><h2>
+<a name="compatibility" class="anchor" href="#compatibility"><span class="octicon octicon-link"></span></a>Compatibility</h2>
+
+<p>Pretty much it should be working on any browser with <code>canvas</code> support.</p>
+
+<h2>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>Soon.</p>
+
+<h2>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
+
+<h3>
+<a name="ajaxurl-string" class="anchor" href="#ajaxurl-string"><span class="octicon octicon-link"></span></a>ajaxURL (String)</h3>
+
+<p>The URL where the plugin will post the screenshot and additional informations. (JSON datatype)</p>
+
+<p><code>Default: ''</code></p>
+
+<h3>
+<a name="postbrowserinfo-boolean" class="anchor" href="#postbrowserinfo-boolean"><span class="octicon octicon-link"></span></a>postBrowserInfo (Boolean)</h3>
+
+<p>Whether you want your client to post their browser information (such as useragent, plugins used, etc.)</p>
+
+<p><code>Default: true</code></p>
+
+<h3>
+<a name="posthtml-boolean" class="anchor" href="#posthtml-boolean"><span class="octicon octicon-link"></span></a>postHTML (Boolean)</h3>
+
+<p>Whether you want your client to post the page's HTML structure.</p>
+
+<p><code>Default: true</code></p>
+
+<h3>
+<a name="posturl-boolean" class="anchor" href="#posturl-boolean"><span class="octicon octicon-link"></span></a>postURL (Boolean)</h3>
+
+<p>Whether you want your client to post the URL of the page.</p>
+
+<p><code>Default: true</code></p>
+
+<h3>
+<a name="proxy-string" class="anchor" href="#proxy-string"><span class="octicon octicon-link"></span></a>proxy (String)</h3>
+
+<p>Url to the proxy which is to be used for loading cross-origin images. If left empty, cross-origin images won't be loaded.</p>
+
+<p><code>Default: ''</code></p>
+
+<h3>
+<a name="letterrendering-boolean" class="anchor" href="#letterrendering-boolean"><span class="octicon octicon-link"></span></a>letterRendering (Boolean)</h3>
+
+<p>Whether to render each letter seperately. Necessary if letter-spacing is used.</p>
+
+<p><code>Default: false</code></p>
+
+<h3>
+<a name="initbuttontext-string--html" class="anchor" href="#initbuttontext-string--html"><span class="octicon octicon-link"></span></a>initButtonText (String / HTML)</h3>
+
+<p>The default button text.</p>
+
+<p><code>Default: Send feedback</code></p>
+
+<h3>
+<a name="strokestyle-string--hex-color" class="anchor" href="#strokestyle-string--hex-color"><span class="octicon octicon-link"></span></a>strokeStyle (String / HEX color)</h3>
+
+<p>The color of the highlight border. You can use values either like 'black', 'red', etc. or HEX codes like '#adadad'.</p>
+
+<p><code>Default: black</code></p>
+
+<h3>
+<a name="shadowcolor-string--hex-color" class="anchor" href="#shadowcolor-string--hex-color"><span class="octicon octicon-link"></span></a>shadowColor (String / HEX color)</h3>
+
+<p>The color of the shadow.</p>
+
+<p><code>Default: black</code></p>
+
+<h3>
+<a name="shadowoffsetx--shadowoffsety-integer" class="anchor" href="#shadowoffsetx--shadowoffsety-integer"><span class="octicon octicon-link"></span></a>shadowOffsetX / shadowOffsetY (Integer)</h3>
+
+<p>Sets the horizontal / vertical distance of the shadow from the shape.</p>
+
+<p><code>Default: 1</code></p>
+
+<h3>
+<a name="shadowblur-integer" class="anchor" href="#shadowblur-integer"><span class="octicon octicon-link"></span></a>shadowBlur (Integer)</h3>
+
+<p>The blur level for the shadow.</p>
+
+<p><code>Default: black</code></p>
+
+<h3>
+<a name="linejoin-string" class="anchor" href="#linejoin-string"><span class="octicon octicon-link"></span></a>lineJoin (String)</h3>
+
+<p>Sets the type of corner created, when two lines meet.</p>
+
+<p><code>Default: bevel</code></p>
+
+<h3>
+<a name="linewidth-integer" class="anchor" href="#linewidth-integer"><span class="octicon octicon-link"></span></a>lineWidth (Integer)</h3>
+
+<p>Sets border of the highlighted area.</p>
+
+<p><code>Default: 3</code></p>
+
+<h3>
+<a name="html2canvasurl-string" class="anchor" href="#html2canvasurl-string"><span class="octicon octicon-link"></span></a>html2canvasURL (String)</h3>
+
+<p>The URL where the plugin can download html2canvas.js from.</p>
+
+<p><code>Default: html2canvas.js</code></p>
+
+<h3>
+<a name="tpldescription--tplhighlighter--tploverview--tplsubmitsuccess--tplsubmiterror-string--html" class="anchor" href="#tpldescription--tplhighlighter--tploverview--tplsubmitsuccess--tplsubmiterror-string--html"><span class="octicon octicon-link"></span></a>tpl.description / tpl.highlighter / tpl.overview / tpl.submitSuccess / tpl.submitError (String / HTML)</h3>
+
+<p>The template of the plugin. You could change it any time, but keep in mind to keep the elements' ids and classes so the script won't break.</p>
+
+<p><code>Default: ...</code></p>
+
+<h3>
+<a name="onclose-function" class="anchor" href="#onclose-function"><span class="octicon octicon-link"></span></a>onClose (Function)</h3>
+
+<p>Function that runs when you close the plugin.</p>
+
+<p><code>Default: null</code></p>
+
+<h3>
+<a name="screenshotstroke-boolean" class="anchor" href="#screenshotstroke-boolean"><span class="octicon octicon-link"></span></a>screenshotStroke (Boolean)</h3>
+
+<p>Changing to <code>false</code> will remove the borders from the highlighted areas when taking the screenshot.</p>
+
+<p><code>Default: true</code></p>
+
+<h3>
+<a name="highlightelement-boolean" class="anchor" href="#highlightelement-boolean"><span class="octicon octicon-link"></span></a>highlightElement (Boolean)</h3>
+
+<p>By default when you move your cursor over an element the plugin will temporarily highlight it until you move your cursor out of that area.
+I'm not exactly sure whether it's a good thing or not, but Google has it, so yeah.</p>
+
+<p><code>Default: true</code></p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>feedback is released under the MIT license. (See <code>LICENSE</code>)</p>
+        </section>
+
+        <footer>
+          Feedback is maintained by <a href="https://github.com/ivoviz">ivoviz</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+                  <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-42834707-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+      </div>
+    </div>
+  </body>
+</html>
