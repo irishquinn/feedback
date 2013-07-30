@@ -264,8 +264,8 @@
 								}
 								
 								$('.feedback-helper').each(function() {
-									if ($toHighlight.attr('data-type') == 'highlight')
-										ctx.clearRect(parseInt($toHighlight.css('left'), 10), parseInt($toHighlight.css('top'), 10), $toHighlight.width(), $toHighlight.height());
+									if ($(this).attr('data-type') == 'highlight')
+										ctx.clearRect(parseInt($(this).css('left'), 10), parseInt($(this).css('top'), 10), $(this).width(), $(this).height());
 								});
 								
 								if (highlight == 0) {
@@ -275,9 +275,9 @@
 								}
 
 								$('.feedback-helper').each(function() {
-									if ($toHighlight.attr('data-type') == 'blackout') {
+									if ($(this).attr('data-type') == 'blackout') {
 										ctx.fillStyle = 'rgba(0,0,0,1)';
-										ctx.fillRect(parseInt($toHighlight.css('left'), 10), parseInt($toHighlight.css('top'), 10), $toHighlight.width(), $toHighlight.height());
+										ctx.fillRect(parseInt($(this).css('left'), 10), parseInt($(this).css('top'), 10), $(this).width(), $(this).height());
 									}
 								});
 								
