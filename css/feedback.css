@@ -14,7 +14,8 @@
 #feedback-close{cursor:pointer;position:absolute;background:url(icons.png) -0px -64px;width:30px;height:30px;}
 .feedback-wizard-close{cursor:pointer;position:absolute;top:2px;right:2px;background:url(icons.png) -0px -34px;width:30px;height:30px;opacity:0.65;}
 .feedback-wizard-close:hover{opacity:1;}
-#feedback-welcome-error{display:none;color:#f13e3e;float:right;margin-right:30px;font-size:13px;line-height:29px;}
+#feedback-welcome-error,#feedback-overview-error{display:none;color:#f13e3e;float:right;margin-right:30px;font-size:13px;line-height:29px;}
+#feedback-overview-error{margin-top:20px;}
 #feedback-highlighter{display:none;bottom:100px;right:100px;position:fixed;width:540px;height:275px;}
 #feedback-overview{display:none;top:10%;left:50%;margin-left:-420px;position:fixed;width:840px!important;height:auto;}
 #feedback-submit-error,#feedback-submit-success{top:30%;left:50%;margin-left:-300px;display:block;position:fixed;width:600px;height:auto;}
@@ -31,7 +32,7 @@
 .feedback-setblackout div{background:url(icons.png) -16px -94px;width:16px;height:16px;margin-top:7px;float:left;}
 .feedback-sethighlight:hover,.feedback-setblackout:hover{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;background-color:#f8f8f8;background-image:-webkit-linear-gradient(top,#f8f8f8,#f1f1f1);background-image:-moz-linear-gradient(top,#f8f8f8,#f1f1f1);background-image:-ms-linear-gradient(top,#f8f8f8,#f1f1f1);background-image:-o-linear-gradient(top,#f8f8f8,#f1f1f1);background-image:linear-gradient(top,#f8f8f8,#f1f1f1);border:1px solid #c6c6c6;color:#333;}
 .feedback-active{-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);box-shadow:inset 0 1px 2px rgba(0,0,0,.1);background-color:#eee;background-image:-webkit-linear-gradient(top,#eee,#e0e0e0);background-image:-moz-linear-gradient(top,#eee,#e0e0e0);background-image:-ms-linear-gradient(top,#eee,#e0e0e0);background-image:-o-linear-gradient(top,#eee,#e0e0e0);background-image:linear-gradient(top,#eee,#e0e0e0);border:1px solid #ccc;color:#333;}
-#feedback-highlighter label {float:left;margin:0 0 0 10px;line-height:30px;font-size:13px;}
+#feedback-highlighter label {float:left;margin:0 0 0 10px;line-height:30px;font-size:13px;font-weight:normal;}
 #feedback-highlighter label.lower{margin-top:10px;}
 .feedback-buttons{float:right;margin-top:20px;clear:both;}
 #feedback-module h3{font-weight:bold;font-size:15px;margin:8px 0;}

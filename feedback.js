@@ -25,7 +25,7 @@
 			tpl: {
 				description:	'<div id="feedback-welcome"><div class="feedback-logo">Feedback</div><p>Feedback lets you send us suggestions about our products. We welcome problem reports, feature ideas and general comments.</p><p>Start by writing a brief description:</p><textarea id="feedback-note-tmp"></textarea><p>Next we\'ll let you identify areas of the page related to your description.</p><button id="feedback-welcome-next" class="feedback-next-btn feedback-btn-gray">Next</button><div id="feedback-welcome-error">Please enter a description.</div><div class="feedback-wizard-close"></div></div>',
 				highlighter:	'<div id="feedback-highlighter"><div class="feedback-logo">Feedback</div><p>Click and drag on the page to help us better understand your feedback. You can move this dialog if it\'s in the way.</p><button class="feedback-sethighlight feedback-active"><div class="ico"></div><span>Highlight</span></button><label>Highlight areas relevant to your feedback.</label><button class="feedback-setblackout"><div class="ico"></div><span>Black out</span></button><label class="lower">Black out any personal information.</label><div class="feedback-buttons"><button id="feedback-highlighter-next" class="feedback-next-btn feedback-btn-gray">Next</button><button id="feedback-highlighter-back" class="feedback-back-btn feedback-btn-gray">Back</button></div><div class="feedback-wizard-close"></div></div>',
-				overview:		'<div id="feedback-overview"><div class="feedback-logo">Feedback</div><div id="feedback-overview-description"><div id="feedback-overview-description-text"><h3>Description</h3><h3 class="feedback-additional">Additional info</h3><div id="feedback-additional-none"><span>None</span></div><div id="feedback-browser-info"><span>Browser Info</span></div><div id="feedback-page-info"><span>Page Info</span></div><div id="feedback-page-structure"><span>Page Structure</span></div></div></div><div id="feedback-overview-screenshot"><h3>Screenshot</h3></div><div class="feedback-buttons"><button id="feedback-submit" class="feedback-submit-btn feedback-btn-blue">Submit</button><button id="feedback-overview-back" class="feedback-back-btn feedback-btn-gray">Back</button></div><div class="feedback-wizard-close"></div></div>',
+				overview:		'<div id="feedback-overview"><div class="feedback-logo">Feedback</div><div id="feedback-overview-description"><div id="feedback-overview-description-text"><h3>Description</h3><h3 class="feedback-additional">Additional info</h3><div id="feedback-additional-none"><span>None</span></div><div id="feedback-browser-info"><span>Browser Info</span></div><div id="feedback-page-info"><span>Page Info</span></div><div id="feedback-page-structure"><span>Page Structure</span></div></div></div><div id="feedback-overview-screenshot"><h3>Screenshot</h3></div><div class="feedback-buttons"><button id="feedback-submit" class="feedback-submit-btn feedback-btn-blue">Submit</button><button id="feedback-overview-back" class="feedback-back-btn feedback-btn-gray">Back</button></div><div id="feedback-overview-error">Please enter a description.</div><div class="feedback-wizard-close"></div></div>',
 				submitSuccess:	'<div id="feedback-submit-success"><div class="feedback-logo">Feedback</div><p>Thank you for your feedback. We value every piece of feedback we receive.</p><p>We cannot respond individually to every one, but we will use your comments as we strive to improve your experience.</p><button class="feedback-close-btn feedback-btn-blue">OK</button><div class="feedback-wizard-close"></div></div>',
 				submitError:	'<div id="feedback-submit-error"><div class="feedback-logo">Feedback</div><p>Sadly an error occured while sending your feedback. Please try again.</p><button class="feedback-close-btn feedback-btn-blue">OK</button><div class="feedback-wizard-close"></div></div>'
 			},
@@ -233,58 +233,66 @@
 				
 				if (settings.highlightElement) {
 					var highlighted = [],
+						tmpHighlighted = [],
 						hidx = 0;
 					
 					$(document).on('mousemove click', '#feedback-canvas',function(e) {
 						if (canDraw) {
 							redraw(ctx);
+							tmpHighlighted = [];
 							$('* :not(body,script,iframe,div,section,.feedback-btn,#feedback-module *)').each(function(){
 								if ($(this).attr('data-highlighted') === 'true')
 									return;
-
-								if (e.pageX > $(this).offset().left && e.pageX < $(this).offset().left + $(this).width() && e.pageY > $(this).offset().top && e.pageY < $(this).offset().top + $(this).height()) {
-										var _x = $(this).position().left + parseInt($(this).css('margin-left'), 10) - 2,
-											_y = $(this).position().top + parseInt($(this).css('margin-top'), 10) - 2,
-											_w = $(this).width() + 4,
-											_h = $(this).height() + 4;
-										
-										if (highlight == 1) {
-											drawlines(ctx, _x, _y, _w, _h);
-											ctx.clearRect(_x, _y, _w, _h);
-											dtype = 'highlight';
-										}
-										
-										$('.feedback-helper').each(function() {
-											if ($(this).attr('data-type') == 'highlight')
-												ctx.clearRect(parseInt($(this).css('left'), 10), parseInt($(this).css('top'), 10), $(this).width(), $(this).height());
-										});
-										
-										if (highlight == 0) {
-											dtype = 'blackout';
-											ctx.fillStyle = 'rgba(0,0,0,0.5)';
-											ctx.fillRect(_x, _y, _w, _h);
-										}
-
-										$('.feedback-helper').each(function() {
-											if ($(this).attr('data-type') == 'blackout') {
-												ctx.fillStyle = 'rgba(0,0,0,1)';
-												ctx.fillRect(parseInt($(this).css('left'), 10), parseInt($(this).css('top'), 10), $(this).width(), $(this).height());
-											}
-										});
-									
-										if (e.type == 'click' && e.pageX == rect.startX && e.pageY == rect.startY) {
-											$('#feedback-helpers').append('<div class="feedback-helper" data-highlight-id="' + hidx + '" data-type="' + dtype + '" data-time="' + Date.now() + '" style="position:absolute;top:' + _y + 'px;left:' + _x + 'px;width:' + _w + 'px;height:' + _h + 'px;z-index:30000;"></div>');
-											highlighted.push(hidx);
-											++hidx;
-											redraw(ctx);
-										}
+								
+								if (e.pageX > $(this).offset().left && e.pageX < $(this).offset().left + $(this).width() && e.pageY > $(this).offset().top + parseInt($(this).css('padding-top'), 10) && e.pageY < $(this).offset().top + $(this).height() + parseInt($(this).css('padding-top'), 10)) {
+										tmpHighlighted.push($(this));
 								}
 							});
+							
+							var $toHighlight = tmpHighlighted[tmpHighlighted.length - 1];
+							
+							if ($toHighlight) {
+								var _x = $toHighlight.offset().left - 2,
+									_y = $toHighlight.offset().top - 2,
+									_w = $toHighlight.width() + parseInt($toHighlight.css('padding-left'), 10) + parseInt($toHighlight.css('padding-right'), 10) + 6,
+									_h = $toHighlight.height() + parseInt($toHighlight.css('padding-top'), 10) + parseInt($toHighlight.css('padding-bottom'), 10) + 6;
+								
+								if (highlight == 1) {
+									drawlines(ctx, _x, _y, _w, _h);
+									ctx.clearRect(_x, _y, _w, _h);
+									dtype = 'highlight';
+								}
+								
+								$('.feedback-helper').each(function() {
+									if ($toHighlight.attr('data-type') == 'highlight')
+										ctx.clearRect(parseInt($toHighlight.css('left'), 10), parseInt($toHighlight.css('top'), 10), $toHighlight.width(), $toHighlight.height());
+								});
+								
+								if (highlight == 0) {
+									dtype = 'blackout';
+									ctx.fillStyle = 'rgba(0,0,0,0.5)';
+									ctx.fillRect(_x, _y, _w, _h);
+								}
+
+								$('.feedback-helper').each(function() {
+									if ($toHighlight.attr('data-type') == 'blackout') {
+										ctx.fillStyle = 'rgba(0,0,0,1)';
+										ctx.fillRect(parseInt($toHighlight.css('left'), 10), parseInt($toHighlight.css('top'), 10), $toHighlight.width(), $toHighlight.height());
+									}
+								});
+								
+								if (e.type == 'click' && e.pageX == rect.startX && e.pageY == rect.startY) {
+									$('#feedback-helpers').append('<div class="feedback-helper" data-highlight-id="' + hidx + '" data-type="' + dtype + '" data-time="' + Date.now() + '" style="position:absolute;top:' + _y + 'px;left:' + _x + 'px;width:' + _w + 'px;height:' + _h + 'px;z-index:30000;"></div>');
+									highlighted.push(hidx);
+									++hidx;
+									redraw(ctx);
+								}
+							}
 						}
 					});
 				}
 				
-				$(document).on('mouseleave', 'body', function() {
+				$(document).on('mouseleave', 'body,#feedback-canvas', function() {
 					redraw(ctx);
 				});
 				
@@ -293,7 +301,7 @@
 				});
 				
 				$(document).on('click', '#feedback-welcome-next', function() {
-					if ($('#feedback-note-tmp').val().length > 0){
+					if ($('#feedback-note').val().length > 0) {
 						canDraw = true;
 						$('#feedback-helpers').show();
 						$('#feedback-welcome').hide();
@@ -438,6 +446,7 @@
 					$('#feedback-overview').hide();
 					$('#feedback-helpers').show();
 					$('#feedback-highlighter').show();
+					$('#feedback-overview-error').hide();
 				});
 				
 				$(document).on('keyup', '#feedback-note-tmp,#feedback-overview-note', function(e) {
@@ -455,24 +464,28 @@
 				$(document).on('click', '#feedback-submit', function() {
 					canDraw = false; 
 
-					$('#feedback-submit-success,#feedback-submit-error').remove();
-					$('#feedback-overview').hide();
-					
-					post.img = img;
-					
-					$.ajax({
-						url: settings.ajaxURL,
-						dataType: 'json',
-						type: 'POST',
-						data: post,
-						success: function() {
-							$('#feedback-module').append(settings.tpl.submitSuccess);
-						},
-						error: function(){
-							$('#feedback-module').append(settings.tpl.submitError);
-						}
-					
-					});
+					if ($('#feedback-note').val().length > 0) {
+						$('#feedback-submit-success,#feedback-submit-error').remove();
+						$('#feedback-overview').hide();
+						
+						post.img = img;
+						
+						$.ajax({
+							url: settings.ajaxURL,
+							dataType: 'json',
+							type: 'POST',
+							data: post,
+							success: function() {
+								$('#feedback-module').append(settings.tpl.submitSuccess);
+							},
+							error: function(){
+								$('#feedback-module').append(settings.tpl.submitError);
+							}
+						});
+					}
+					else {
+						$('#feedback-overview-error').show();
+					}
 				});
 			});
 		}
