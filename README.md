@@ -29,11 +29,11 @@ Init plugin:
     
 ## Compatibility
 
-Pretty much it should be working on any browser with `canvas` support.
+Pretty much it should be working on any browser with `canvas` support. Browsers with no canvas support won't display the feedback button.
 
 ## Demo
 
-Soon.
+[http://ivoviz.github.io/feedback/](http://ivoviz.github.io/feedback/) - Click "Send feedback" at the bottom right of the page.
 
 ## Options
 
