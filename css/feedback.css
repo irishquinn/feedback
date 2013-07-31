@@ -9,7 +9,7 @@
 .feedback-back-btn{width:72px;height:29px;line-height:27px;float:right;font-size:13px;padding:0 8px;margin-right:20px;}
 .feedback-submit-btn{width:72px;height:29px;line-height:27px;float:right;font-size:13px;padding:0 8px;}
 .feedback-close-btn{width:72px;height:29px;line-height:27px;float:right;font-size:13px;padding:0 8px;}
-.feedback-helper{background:rgba(0,0,0,0);}
+.feedback-helper{background:rgba(0,0,0,0);cursor:default;}
 .feedback-helper[data-type="highlight"]>.feedback-helper-inner{background:rgba(0,68,255,0.1);}
 #feedback-close{cursor:pointer;position:absolute;background:url(icons.png) -0px -64px;width:30px;height:30px;}
 .feedback-wizard-close{cursor:pointer;position:absolute;top:2px;right:2px;background:url(icons.png) -0px -34px;width:30px;height:30px;opacity:0.65;}
