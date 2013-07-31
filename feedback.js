@@ -148,7 +148,6 @@
 				
 				$(document).on('mousedown', '#feedback-canvas', function(e) {
 					if (canDraw) {
-						$('#feedback-helpers').hide();
 
 						rect.startX = e.pageX - $(this).offset().left;
 						rect.startY = e.pageY - $(this).offset().top;
@@ -160,7 +159,6 @@
 
 				$(document).on('mouseup', function(){		
 					if (canDraw) {
-						$('#feedback-helpers').show();
 						drag = false;
 
 						var dtop	= rect.startY,
@@ -240,6 +238,9 @@
 						if (canDraw) {
 							redraw(ctx);
 							tmpHighlighted = [];
+							
+							$('#feedback-canvas').css('cursor', 'crosshair');
+							
 							$('* :not(body,script,iframe,div,section,.feedback-btn,#feedback-module *)').each(function(){
 								if ($(this).attr('data-highlighted') === 'true')
 									return;
@@ -251,7 +252,9 @@
 							
 							var $toHighlight = tmpHighlighted[tmpHighlighted.length - 1];
 							
-							if ($toHighlight) {
+							if ($toHighlight && !drag) {
+								$('#feedback-canvas').css('cursor', 'pointer');
+								
 								var _x = $toHighlight.offset().left - 2,
 									_y = $toHighlight.offset().top - 2,
 									_w = $toHighlight.width() + parseInt($toHighlight.css('padding-left'), 10) + parseInt($toHighlight.css('padding-right'), 10) + 6,
@@ -303,6 +306,7 @@
 				$(document).on('click', '#feedback-welcome-next', function() {
 					if ($('#feedback-note').val().length > 0) {
 						canDraw = true;
+						$('#feedback-canvas').css('cursor', 'crosshair');
 						$('#feedback-helpers').show();
 						$('#feedback-welcome').hide();
 						$('#feedback-highlighter').show();
@@ -313,8 +317,12 @@
 				});
 				
 				$(document).on('mouseenter mouseleave', '.feedback-helper', function(e) {
+					if (drag)
+						return;
+					
 					rect.w = 0;
 					rect.h = 0;
+					
 					if (e.type === 'mouseenter') {
 						$(this).css('z-index', '30001');
 						$(this).append('<div class="feedback-helper-inner" style="width:' + ($(this).width() - 2) + 'px;height:' + ($(this).height() - 2) + 'px;position:absolute;margin:1px;"></div>');
@@ -391,6 +399,7 @@
 				
 				$(document).on('click', '#feedback-highlighter-back', function() {
 					canDraw = false;
+					$('#feedback-canvas').css('cursor', 'default');
 					$('#feedback-helpers').hide();
 					$('#feedback-highlighter').hide();
 					$('#feedback-welcome-error').hide();
@@ -411,6 +420,7 @@
 				
 				$(document).on('click', '#feedback-highlighter-next', function() {
 					canDraw = false;
+					$('#feedback-canvas').css('cursor', 'default');
 					var sy = $(document).scrollTop(),
 						dh = $(window).height();
 					$('#feedback-helpers').hide();
@@ -443,6 +453,7 @@
 				
 				$(document).on('click', '#feedback-overview-back', function(e) {
 					canDraw = true;
+					$('#feedback-canvas').css('cursor', 'crosshair');
 					$('#feedback-overview').hide();
 					$('#feedback-helpers').show();
 					$('#feedback-highlighter').show();
