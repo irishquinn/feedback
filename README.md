@@ -35,6 +35,16 @@ Pretty much it should be working on any browser with `canvas` support. Browsers 
 
 [http://ivoviz.github.io/feedback/](http://ivoviz.github.io/feedback/) - Click "Send feedback" at the bottom right of the page.
 
+## Post Data
+
+The information from the client will be sent through ajax post request. The information is in JSON format.
+
+* `post.browser` - Browser information.
+* `post.url` - The page URL. - **urlencoded!**
+* `post.note` - Description of the feedback.
+* `post.img` - The screenshot of the feedback. - **base64 encoded!**
+* `post.html` - The structure of the page. - **urlencoded!**
+
 ## Options
 
 ### ajaxURL (String)
