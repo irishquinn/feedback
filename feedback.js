@@ -480,7 +480,8 @@
 						$('#feedback-overview').hide();
 						
 						post.img = img;
-						
+						post.note = $('#feedback-note').val();
+
 						$.ajax({
 							url: settings.ajaxURL,
 							dataType: 'json',
