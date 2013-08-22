@@ -9,7 +9,7 @@ Load jQuery, the plugin, and its CSS:
 ```html
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="feedback.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/feedback.css" />
+	<link rel="stylesheet" href="feedback.min.css" />
 ```
 
 Init plugin:
