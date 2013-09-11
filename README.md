@@ -156,6 +156,12 @@ I'm not exactly sure whether it's a good thing or not, but Google has it, so yea
 
 `Default: true`
 
+### initialBox (Boolean)
+
+Setting this true the user will have to describe the bug/idea before being able to highlight the area.
+
+`Default: false`
+
 ## License
 
 feedback is released under the MIT license. (See `LICENSE`)
