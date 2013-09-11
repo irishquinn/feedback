@@ -31,7 +31,8 @@
 			},
 			onClose: 			function() {},
 			screenshotStroke:	true,
-			highlightElement:	true
+			highlightElement:	true,
+			initialBox:			false
 			
         }, options);
 		
@@ -53,8 +54,14 @@
 					img = '',
 					h 	= $(document).height(),
 					w 	= $(document).width(),
-					tpl = '<div id="feedback-module">' + settings.tpl.description + settings.tpl.highlighter + settings.tpl.overview + '<canvas id="feedback-canvas"></canvas><div id="feedback-helpers"></div><input id="feedback-note" name="feedback-note" type="hidden"></div>';
-					
+					tpl = '<div id="feedback-module">';
+				
+				if (settings.initialBox) {
+					tpl += settings.tpl.description;
+				}
+				
+				tpl += settings.tpl.highlighter + settings.tpl.overview + '<canvas id="feedback-canvas"></canvas><div id="feedback-helpers"></div><input id="feedback-note" name="feedback-note" type="hidden"></div>';
+				
 				$('body').append(tpl);
 				
 				moduleStyle = {
@@ -69,6 +76,15 @@
 				
 				$('#feedback-module').css(moduleStyle);
 				$('#feedback-canvas').attr(canvasAttr).css('z-index', '30000');
+				
+				if (!settings.initialBox) {
+					$('#feedback-highlighter-back').remove();
+					canDraw = true;
+					$('#feedback-canvas').css('cursor', 'crosshair');
+					$('#feedback-helpers').show();
+					$('#feedback-welcome').hide();
+					$('#feedback-highlighter').show();
+				}
 				
 				$('#feedback-highlighter').on('mousedown', function(e) {
 					var $d = $(this).addClass('feedback-draggable'),
